@@ -47,6 +47,11 @@ const BottomMenu = () => {
     navigate(`/settings/user/${user.id}`);
   };
 
+  const handleSubscription = () => {
+    setAnchorEl(null);
+    navigate(`/settings/user/${user.id}`);
+  };
+
   const handleLogout = async () => {
     setAnchorEl(null);
 
@@ -121,6 +126,9 @@ const BottomMenu = () => {
         )}
       </BottomNavigation>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+        <MenuItem onClick={handleSubscription}>
+          <Typography color="textPrimary">{t('subscription')}</Typography>
+        </MenuItem>
         <MenuItem onClick={handleAccount}>
           <Typography color="textPrimary">{t('settingsUser')}</Typography>
         </MenuItem>

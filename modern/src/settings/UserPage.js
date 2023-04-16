@@ -82,6 +82,10 @@ const UserPage = () => {
     }
   });
 
+  const handleSubscriptionSetting = useCatch(async () => {
+
+  });
+
   const query = useQuery();
   const [queryHandled, setQueryHandled] = useState(false);
   const attribute = query.get('attribute');
@@ -359,6 +363,29 @@ const UserPage = () => {
                   disabled={!manager}
                 />
               </FormGroup>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion defaultExpanded={!attribute}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="subtitle1">
+                {t('sharedSubscription')}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails className={classes.details}>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={item.twelveHourFormat} onChange={(event) => setItem({ ...item, twelveHourFormat: event.target.checked })} />}
+                  label={t('sharedSubscriptionStatus')}
+                />
+              </FormGroup>
+              <Button
+                color="primary"
+                variant="contained"
+                href="https://dashboard.stripe.com/login"
+                onClick={handleSubscriptionSetting}
+              >
+                {t('sharedSubscriptionSettings')}
+              </Button>
             </AccordionDetails>
           </Accordion>
           <EditAttributesAccordion
