@@ -54,6 +54,7 @@ const UserPage = () => {
   const fixedEmail = useRestriction('fixedEmail');
 
   const currentUser = useSelector((state) => state.session.user);
+  const subscriptionURL = process.env.REACT_APP_SUBSCRIPTION_BASE_URL + '?email='.concat(currentUser.email).concat('&name=').concat(currentUser.name);
   const registrationEnabled = useSelector((state) => state.session.server.registration);
   const openIdForced = useSelector((state) => state.session.server.openIdForce);
 
@@ -374,14 +375,14 @@ const UserPage = () => {
             <AccordionDetails className={classes.details}>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox checked={item.twelveHourFormat} onChange={(event) => setItem({ ...item, twelveHourFormat: event.target.checked })} />}
+                  control={<Checkbox disabled checked={item.twelveHourFormat} onChange={(event) => setItem({ ...item, twelveHourFormat: event.target.checked })} />}
                   label={t('sharedSubscriptionStatus')}
                 />
               </FormGroup>
               <Button
                 color="primary"
                 variant="contained"
-                href="https://dashboard.stripe.com/login"
+                href={subscriptionURL}
                 onClick={handleSubscriptionSetting}
               >
                 {t('sharedSubscriptionSettings')}
